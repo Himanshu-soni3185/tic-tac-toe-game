@@ -12,16 +12,11 @@ const winText      = document.getElementById("winText");
 const modeSelector = document.getElementById("mode");
 const restartBtn   = document.getElementById("restartBtn");
 
-// Update the "Turn: X/O" display with proper color
+// Update the "Turn: X/O" display with proper color classes
 function updateTurnText() {
     turnText.innerText = `Turn: ${currentPlayer}`;
-    if (currentPlayer === "X") {
-        turnText.style.color = "rgb(240, 134, 20)";
-        turnText.style.webkitTextStroke = "1px rgb(240, 134, 20)";
-    } else {
-        turnText.style.color = "rgb(3, 165, 3)";
-        turnText.style.webkitTextStroke = "1px rgb(3, 165, 3)";
-    }
+    turnText.className = "player"; // Reset classes
+    turnText.classList.add(currentPlayer === "X" ? "turn-x" : "turn-o");
 }
 
 // Check for a win or draw, highlight winning cells and display result
@@ -43,11 +38,12 @@ function checkWin() {
             // win!
             isGameOver = true;
             winText.innerText = `${values[a]} wins!`;
-            const color = values[a] === "X" ? "rgb(240, 134, 20)" : "rgb(3, 165, 3)";
-            winText.style.color = color;
-            winText.style.webkitTextStroke = `1px ${color}`;
-            // highlight
+            winText.className = "win"; // Reset classes
+            winText.classList.add(values[a] === "X" ? "turn-x" : "turn-o");
+            // highlight board cells
             [a,b,c].forEach(i => boxes[i].classList.add(`win-${values[a]}`));
+            turnText.innerText = "Game Over";
+            turnText.className = "player win-draw"; // Neutral style for game over
             return;
         }
     }
@@ -56,8 +52,9 @@ function checkWin() {
     if (values.every(v => v)) {
         isGameOver = true;
         winText.innerText = `It's a draw!`;
-        winText.style.color = "#ccc";
-        winText.style.webkitTextStroke = "1px #ccc";
+        winText.className = "win win-draw";
+        turnText.innerText = "Game Over";
+        turnText.className = "player win-draw";
     }
 }
 
@@ -157,8 +154,7 @@ function startGame(mode = "multiplayer") {
     currentPlayer = "X";
     isGameOver    = false;
     winText.innerText = "";
-    winText.style.color = "";
-    winText.style.webkitTextStroke = "";
+    winText.className = "win"; // Reset win text class
 
     // clear board
     boxes.forEach(b => {
