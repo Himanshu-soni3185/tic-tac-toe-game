@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic_Tac_Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Tic Tac Toe</h1>
+    </header>
+    <div class="win" id="winText"></div>
+    <div class="controls">
+        <label>Play Mode:</label>
+        <select id="mode">
+            <option value="human">2 Players</option>
+            <option value="easy">Vs Easy AI</option>
+            <option value="hard">Vs Hard AI</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <div id="box11" class="box row1 col1"><span></span></div>
+        <div id="box12" class="box row1 col2"><span></span></div>
+        <div id="box13" class="box row1 col3"><span></span></div>
+        <div id="box21" class="box row2 col1"><span></span></div>
+        <div id="box22" class="box row2 col2"><span></span></div>
+        <div id="box23" class="box row2 col3"><span></span></div>
+        <div id="box31" class="box row3 col1"><span></span></div>
+        <div id="box32" class="box row3 col2"><span></span></div>
+        <div id="box33" class="box row3 col3"><span></span></div>
+    </div>
+    <div class="player" id="turnText">Turn: O</div>
+    <button id="restartBtn" onclick="resetGame()">Restart</button>
+    <script src="script.js"></script>
+
+
+
+</body>
+
+</html>
